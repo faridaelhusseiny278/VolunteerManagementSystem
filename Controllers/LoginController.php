@@ -59,16 +59,14 @@ class LoginController
         }
 
         $result = $this->loginContext->login($email, $password);
-        header('Location: ../Views/VolunteerView.php');
-            exit();
+
         if ($result) {
             $this->renderMessage("Login successful using $provider! Welcome, " . htmlspecialchars($result->FirstName) . ".");
             header('Location: ../Views/VolunteerView.php');
             exit();
         
         } else {
-            header('Location: ../Views/VolunteerView.php');
-            exit();
+            $this->renderError("Login failed. Please check your credentials.");
         }
     }
 
