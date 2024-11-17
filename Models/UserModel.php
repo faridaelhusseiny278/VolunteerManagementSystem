@@ -74,7 +74,7 @@ class User {
             $UserTypeID =User::getUserTypeIDByName($UserType);
         
             if ($UserTypeID === null) {
-                echo "Error: UserType '$UserType' not found.";
+                // echo "Error: UserType '$UserType' not found.";
                 return null;
             }
         
@@ -88,7 +88,7 @@ class User {
             $user_new->PASSWORD_HASH = $PASSWORD_HASH;
             $user_new->LAST_LOGIN = $LAST_LOGIN;
             $user_new->ACCOUNT_CREATION_DATE = $ACCOUNT_CREATION_DATE;
-            
+
             $query = "INSERT INTO " . $user_new->table_name . " 
                       (FirstName, LastName, Email, PhoneNumber, DateOfBirth, USER_NAME, PASSWORD_HASH, LAST_LOGIN, ACCOUNT_CREATION_DATE, UserTypeID) 
                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -96,7 +96,7 @@ class User {
             $conn = Database::getInstance()->getConnection();
             $stmt = $conn->prepare($query);
             if ($stmt === false) {
-                echo "Prepare failed: " . $conn->error;
+                // echo "Prepare failed: " . $conn->error;
                 return null;
             }
 
@@ -109,7 +109,7 @@ class User {
                 $user_new->UserID = $conn->insert_id;
                 return $user_new;
             } else {
-                echo "Error: " . $stmt->error;
+                // echo "Error: " . $stmt->error;
                 return null;
             }
         }
@@ -208,7 +208,7 @@ class User {
                   WHERE up.User_ID = ?";
         $stmt = $this->conn->prepare($query);
         if ($stmt === false) {
-            echo "Prepare failed: " . $this->conn->error;
+            // echo "Prepare failed: " . $this->conn->error;
             return null;
         }
         $stmt->bind_param("i", $this->UserID);
@@ -245,14 +245,14 @@ class User {
                   WHERE ua.UserID = ?";
         $stmt = $this->conn->prepare($query);
         if ($stmt === false) {
-            echo "Prepare failed: " . $this->conn->error;
+            // echo "Prepare failed: " . $this->conn->error;
             return null;
         }
         
         
         $stmt->bind_param("i", $this->UserID);
         if ($stmt === false) {
-            echo "Prepare failed: " . $this->conn->error;
+            // echo "Prepare failed: " . $this->conn->error;
             return null;
         }
         $stmt->execute();
@@ -305,11 +305,11 @@ class User {
         $stmt->bind_param("sssssssi", $FirstName, $LastName, $Email, $PhoneNumber, $DateOfBirth, $USER_NAME, $PASSWORD_HASH, $UserID);
 
         if ($stmt->execute()) {
-            echo "User updated successfully.";
+            // echo "User updated successfully.";
             return true;
         }
         else {
-            echo "Error: " . $stmt->error;
+            // echo "Error: " . $stmt->error;
             return false;
         }
     }
@@ -363,7 +363,7 @@ class User {
                   WHERE un.UserID = ?";
         $stmt = $this->conn->prepare($query);
         if ($stmt === false) {
-            echo "Prepare failed: " . $this->conn->error;
+            // echo "Prepare failed: " . $this->conn->error;
             return null;
         }
         $stmt->bind_param("i", $this->UserID);

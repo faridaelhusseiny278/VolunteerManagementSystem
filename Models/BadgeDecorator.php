@@ -36,11 +36,11 @@ abstract class VolunteerBadge
                 $row = $result->fetch_assoc();
                 return $row['badge_id'];
             } else {
-                echo "Badge not found";
+                // echo "Badge not found";
                 return null;
             }
         } else {
-            echo "Error retrieving badge ID: " . $stmt->error;
+            // echo "Error retrieving badge ID: " . $stmt->error;
             return null;
         }
     }
